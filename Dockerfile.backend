@@ -86,9 +86,10 @@ RUN chmod +x /opt/chrome/chrome
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-COPY requirements.txt requirements_extra.txt .
+COPY requirements.txt requirements_extra.txt requirements_ai.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir -r requirements_extra.txt
+RUN pip install --no-cache-dir -r requirements_ai.txt
 
 RUN mkdir -p /opt/workspace
 RUN mkdir -p /tmp && chmod 1777 /tmp
