@@ -68,7 +68,7 @@ The agent selection is done in 4 steps:
 ## Getting Started
 
 1. Follow the setup instructions in `README.md` to clone the repo, configure `.env` and `config.ini`, and start Docker services.
-2. Use `start_services.sh full` to run the backend and the React frontend, then access the app on `http://localhost:3000`.
+2. Use `docker compose --profile full up` to run the backend and the React frontend, then access the app on `http://localhost:3000`.
 3. For CLI usage, run `python3 cli.py` after installation.
 
 ## Suggested Next Steps for Newcomers
