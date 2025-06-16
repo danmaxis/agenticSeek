@@ -10,6 +10,8 @@ if [ -z "$WORK_DIR" ]; then
     exit 1
 fi
 
+echo "If you intend to run AgenticSeek directly on your host (CLI mode) make sure to run ./install.sh first to install dependencies."
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     dir_size_bytes=$(du -s -b "$WORK_DIR" 2>/dev/null | awk '{print $1}')
 else
@@ -28,7 +30,7 @@ fi
 if [ "$1" = "full" ]; then
     echo "Starting full deployment with backend and all services..."
 else
-    echo "Starting core deployment with frontend and search services only... use ./start_services.sh full to start backend as well"
+    echo "Starting core deployment with frontend and search services only... use 'docker compose --profile full up' to start the backend as well"
 fi
 
 if ! command_exists docker; then
@@ -63,18 +65,16 @@ else
     echo "Docker daemon is running."
 fi
 
-# Check if Docker Compose is installed
-if ! command_exists docker-compose && ! docker compose version >/dev/null 2>&1; then
-    echo "Error: Docker Compose is not installed. Please install it first."
-    echo "On Ubuntu: sudo apt install docker-compose"
-    echo "Or via pip: pip install docker-compose"
-    exit 1
-fi
-
-if command_exists docker-compose; then
-    COMPOSE_CMD="docker-compose"
-else
+# Check if Docker Compose is installed (prefer V2 'docker compose')
+if docker compose version >/dev/null 2>&1; then
     COMPOSE_CMD="docker compose"
+elif command_exists docker-compose; then
+    COMPOSE_CMD="docker-compose"
+    echo "Warning: using legacy docker-compose. Consider installing Docker Compose V2 (docker compose)."
+else
+    echo "Error: Docker Compose is not installed. Please install Docker Compose V2."
+    echo "On Ubuntu: sudo apt-get install docker-compose-plugin"
+    exit 1
 fi
 
 # Check if docker-compose.yml exists

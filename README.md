@@ -249,37 +249,35 @@ Next step: [Start services and run AgenticSeek](#Start-services-and-Run)
 
 By default AgenticSeek is run fully in docker.
 
-Start required services. This will start all services from the docker-compose.yml, including:
+Start required services with Docker Compose. This will start all services from the `docker-compose.yml` file, including:
     - searxng
     - redis (required by searxng)
     - frontend
-    - backend (if using `full`)
+    - backend
 
 ```sh
-./start_services.sh full # MacOS
-start ./start_services.cmd full # Window
+docker compose --profile full up
 ```
 
 **Warning:** This step will download and load all Docker images, which may take up to 30 minutes. After starting the services, please wait until the backend service is fully running (you should see **backend: "GET /health HTTP/1.1" 200 OK** in the log) before sending any messages. The backend services might take 5 minute to start on first run.
 
 Go to `http://localhost:3000/` and you should see the web interface.
 
-*Troubleshooting service start:* If these scripts fail, ensure Docker Engine is running and Docker Compose (V2, `docker compose`) is correctly installed. Check the output in the terminal for error messages. See [FAQ: Help! I get an error when running AgenticSeek or its scripts.](#faq-troubleshooting)
+*Troubleshooting service start:* If the compose command fails, ensure Docker Engine is running and Docker Compose (V2, `docker compose`) is correctly installed. Check the output in the terminal for error messages. See [FAQ: Help! I get an error when running AgenticSeek or its scripts.](#faq-troubleshooting)
 
 **Optional:** Run on host (CLI mode):
 
-To run with CLI interface you would have to install package on host:
+Install the required Python packages on your machine:
 
 ```sh
 ./install.sh
-./install.bat # windows
+./install.bat # Windows
 ```
 
-Start services:
+Start the services locally (backend will run on your host):
 
 ```sh
-./start_services.sh # MacOS
-start ./start_services.cmd # Window
+docker compose --profile core up
 ```
 
 Use the CLI: `python3 cli.py`
@@ -289,7 +287,7 @@ Use the CLI: `python3 cli.py`
 
 ## Usage
 
-Make sure the services are up and running with `./start_services.sh full` and go to `localhost:3000` for web interface.
+Make sure the services are up and running with `docker compose --profile full up` and go to `localhost:3000` for the web interface.
 
 You can also use speech to text by setting `listen = True` in the config. Only for CLI mode.
 
