@@ -3,7 +3,8 @@ FROM --platform=linux/amd64 python:3.11-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install essential packages and Chrome dependencies
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update -y
+RUN apt-get install -y \
     wget \
     gnupg2 \
     ca-certificates \
@@ -11,7 +12,8 @@ RUN apt-get update -y && apt-get install -y \
     xvfb \
     libxss1 \
     libappindicator1 \
-    fonts-liberation \
+    fonts-liberation
+RUN apt-get install -y \
     libnss3 \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
@@ -24,8 +26,8 @@ RUN apt-get update -y && apt-get install -y \
     dbus \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update -y && \
-      apt-get install -y \
+RUN apt-get update -y
+RUN apt-get install -y \
       gcc \
       g++ \
       gfortran \
@@ -34,7 +36,8 @@ RUN apt-get update -y && \
       ffmpeg \
       libavcodec-dev \
       libavformat-dev \
-      libavutil-dev \
+      libavutil-dev
+RUN apt-get install -y \
       gnupg2 \
       wget \
       unzip \
@@ -83,8 +86,9 @@ RUN chmod +x /opt/chrome/chrome
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-COPY requirements.txt .
+COPY requirements.txt requirements_extra.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_extra.txt
 
 RUN mkdir -p /opt/workspace
 RUN mkdir -p /tmp && chmod 1777 /tmp
