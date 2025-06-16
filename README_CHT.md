@@ -306,7 +306,7 @@ cd agenticSeek/llm_server/
 安裝服務器依賴：
 
 ```sh
-pip3 install -r requirements.txt
+pip3 install --no-cache-dir -r requirements.txt -r requirements_extra.txt -r requirements_ai.txt
 ```
 
 運行服務器腳本：

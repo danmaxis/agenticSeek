@@ -55,6 +55,20 @@ if exist "requirements.txt" (
         echo Warning: Some packages from requirements.txt failed to install.
     )
 )
+if exist "requirements_extra.txt" (
+    echo Adding dependencies from requirements_extra.txt...
+    uv add -r requirements_extra.txt
+    if %errorlevel% neq 0 (
+        echo Warning: Some packages from requirements_extra.txt failed to install.
+    )
+)
+if exist "requirements_ai.txt" (
+    echo Adding dependencies from requirements_ai.txt...
+    uv add -r requirements_ai.txt
+    if %errorlevel% neq 0 (
+        echo Warning: Some packages from requirements_ai.txt failed to install.
+    )
+)
 
 echo Installation complete for Windows!
 echo To activate the environment, run: .venv\Scripts\activate

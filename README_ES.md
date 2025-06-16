@@ -308,7 +308,7 @@ cd agenticSeek/llm_server/
 Instala los requisitos específicos del servidor:
 
 ```sh
-pip3 install -r requirements.txt
+pip3 install --no-cache-dir -r requirements.txt -r requirements_extra.txt -r requirements_ai.txt
 ```
 
 Ejecuta el script del servidor.

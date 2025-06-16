@@ -45,6 +45,14 @@ if [ -f "requirements.txt" ]; then
     echo "Adding dependencies from requirements.txt..."
     uv add -r requirements.txt || { echo "Failed to add requirements from requirements.txt"; exit 1; }
 fi
+if [ -f "requirements_extra.txt" ]; then
+    echo "Adding dependencies from requirements_extra.txt..."
+    uv add -r requirements_extra.txt || { echo "Failed to add requirements from requirements_extra.txt"; exit 1; }
+fi
+if [ -f "requirements_ai.txt" ]; then
+    echo "Adding dependencies from requirements_ai.txt..."
+    uv add -r requirements_ai.txt || { echo "Failed to add requirements from requirements_ai.txt"; exit 1; }
+fi
 
 echo "Installation complete for macOS!"
 echo "To activate the environment, run: source .venv/bin/activate"
